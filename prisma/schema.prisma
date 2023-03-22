@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model PostCard {
+  id Int @id @default(autoincrement())
+  title String @unique
+  description String
+  image_url String
+  created_at DateTime
+
+  selos SeloPostal[]
+
+}
+
+model SeloPostal{
+  id Int @id @default(autoincrement())
+  title String
+  origin_place String
+  tax Float
+
+  post_card_id Int
+  post_card PostCard @relation(fields: [post_card_id], references: [id])
+
+}
