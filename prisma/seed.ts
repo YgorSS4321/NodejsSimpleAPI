@@ -12,8 +12,6 @@ async function run(){
     */
 
     await Promise.all([
-
-        
         
         prisma.seloPostal.create({
             data: {
@@ -24,7 +22,7 @@ async function run(){
             }
         }),
         
-        
+        /*
         prisma.seloPostal.create({
             data: {
                 title: "title2",
@@ -34,6 +32,8 @@ async function run(){
                 
             }
         }),
+        */
+        
         
 
         prisma.postCard.create({
@@ -43,6 +43,15 @@ async function run(){
                 image_url: "image_url",
                 created_at: new Date('2018-06-03T03:00:00.000'),
                 id: 3,
+            }
+        }),
+        prisma.postCard.create({
+            data: {
+                title: "some postalCard 2",
+                description: "something about postalCard",
+                image_url: "image_url",
+                created_at: new Date('2017-05-03T03:00:00.000'),
+                id: 4,
             }
         }),
         
