@@ -1,6 +1,6 @@
 # NodejsSimpleAPI
 
-##Node.js + Fastify + Typescript + Prisma + SQLite
+### Node.js + Fastify + Typescript + Prisma + SQLite
 
 This is a simple Postcards API, created for learning purposes
 
