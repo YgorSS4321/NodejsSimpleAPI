@@ -5,55 +5,55 @@ const prisma = new PrismaClient();
 async function run(){
     await prisma.seloPostal.deleteMany()
     await prisma.postCard.deleteMany()
-    
-
-    /*
-    * create Selos and PostalCards
-    */
 
     await Promise.all([
-        
-        prisma.seloPostal.create({
-            data: {
-                title: "title1",
-                origin_place: "place1",
-                tax: 12.25,
-                post_card_id: 3,
-            }
-        }),
-        
-        /*
-        prisma.seloPostal.create({
-            data: {
-                title: "title2",
-                origin_place: "place2",
-                tax: 6.25,
-                post_card_id: 3,
-                
-            }
-        }),
-        */
-        
-        
 
         prisma.postCard.create({
             data: {
-                title: "some postalCard",
-                description: "something about postalCard",
-                image_url: "image_url",
-                created_at: new Date('2018-06-03T03:00:00.000'),
-                id: 3,
-            }
+                title: "titulo1",
+                description: "something about the postalCard",
+                selos: {
+                    create: [
+                        {
+                            title: "selo1",
+                            tax: 14.5,
+                            origin_place: "correio",
+                            //id: 33,
+                        },
+                        {
+                            title: "selo2",
+                            tax: 13.75,
+                            origin_place: "Igreja Nova",
+                            //id: 33,
+                        },
+                        {
+                            title: "selo3",
+                            tax: 13.75,
+                            origin_place: "Olho Dágua Grande",
+                            
+                        }
+                    ]
+                }
+            },
+
+                
+            
         }),
+
         prisma.postCard.create({
             data: {
-                title: "some postalCard 2",
-                description: "something about postalCard",
-                image_url: "image_url",
-                created_at: new Date('2017-05-03T03:00:00.000'),
-                id: 4,
+                title: "titulo2",
+                description: "something about the postcard",
+                selos: {
+                    create:{
+                        title: "selo6",
+                        tax: 6.25,
+                        origin_place: "some place"
+                    }
+                }
+
             }
-        }),
+        })
         
     ]);
 }

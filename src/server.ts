@@ -8,14 +8,14 @@ dotenv.config();
 const app = Fastify();
 
 app.register(cors);
-app.register(appRoutes)
+app.register(appRoutes);
 
 app.listen({
     port: 3333, 
 }).then( () => {
     console.log("http server is running");
 
-})
+});
 
 
 

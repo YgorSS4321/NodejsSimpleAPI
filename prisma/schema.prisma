@@ -18,8 +18,8 @@ model PostCard {
   id Int @id @default(autoincrement())
   title String @unique
   description String
-  image_url String
-  created_at DateTime
+  image_url String @default("https://avatars.githubusercontent.com/u/103438009?v=4")
+  created_at DateTime @default(now())
 
   selos SeloPostal[]
 

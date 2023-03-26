@@ -13,35 +13,80 @@ export async function defaultReturn(request: FastifyRequest){
 
     return {
         name: "teste",
-        age: "1234",
-        extra: request.params
+        someNumber: "1234",
     };
 }
 
 
 export async function showPostalCards(request: FastifyRequest){
-    const getPostalCardsSchema = z.object({
-        title: z.string().min(2).max(100),
-        description: z.string().max(600),
-        image_url: z.string().url(),
-        created_at: z.string().datetime()
-    });
-
-
     
+    return await prisma.postCard.findMany({
+        select: {
+            title: true,
+            description: true,
+            image_url: true,
 
+            selos: {
+                select: {
+                    title: true,
+                }
+            }
 
+        }
+        
+    });
 }
 
 export async function showPostalCardById(request: FastifyRequest){
-    return {
-        name: "teste",
-        age: "1234",
-        extra: request.params
-    };
+   const validateID = z.object({
+    id: z.string().transform(id => Number(id))
+   })
+
+   const { id } = validateID.parse(request.params);
+   
+   return await prisma.postCard.findFirst({
+        where: {
+            id: {
+                equals: id,
+                
+            },
+        },
+        select: {
+            title: true,
+            description: true,
+            image_url: true,
+
+            selos: {
+                select: {
+                    title: true,
+                }
+            }
+
+        }
+    });
 }
 
 export async function registerPostCard(request: FastifyRequest){
+    
+    const getPostalCardsSchema = z.object({
+        title: z.string().min(2).max(100),
+        description: z.string().max(600),
+        image_url: z.string().url().nullable(),
+        created_at: z.string().datetime().nullable()
+    });
+
+    const {title, description} = getPostalCardsSchema.parse(request.body);
+    console.log(title);
+    console.log(description);
+    
+
+    await prisma.postCard.create({
+        data: {
+            title: title,
+            description: description,
+        }
+    })
+    
     
 }
 
