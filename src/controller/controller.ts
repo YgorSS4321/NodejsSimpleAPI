@@ -1,7 +1,8 @@
-import { FastifyRequest } from "fastify";
+import { FastifyReply, FastifyRequest } from "fastify";
 import { PrismaClient } from "@prisma/client";
 import { z } from 'zod';
 import { equal } from "assert";
+import { FastifyViewOptions } from "@fastify/view";
 
 export const prisma = new PrismaClient({
     log: ['query'],
@@ -133,6 +134,18 @@ export async function updateSeloPostalTax(request: FastifyRequest){
             tax: tax,
         }
     })
+
+
+}
+
+
+export async function renderHomePage(request: FastifyRequest, reply: FastifyReply){
+    //reply.send("hello world to the new controller");
+
+    console.log(reply.type);
+
+
+    return await reply.view("./src/views/home.pug", {youAreUsingPug: true});
 
 
 }

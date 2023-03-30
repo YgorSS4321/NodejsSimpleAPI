@@ -7,6 +7,12 @@ dotenv.config();
 
 const app = Fastify();
 
+app.register(require("@fastify/view"),{
+    engine: {
+        pug: require("pug")
+    }
+})
+
 app.register(cors);
 app.register(appRoutes);
 
