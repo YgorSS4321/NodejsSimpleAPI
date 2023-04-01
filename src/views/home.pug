@@ -3,10 +3,15 @@ html(lang="en")
   head
     title= pageTitle
     script(type='text/javascript')
-    link(rel='stylesheet', href='/public/stylesheet/style.css')
+    link(rel='stylesheet', type="text/css" href='/public/stylesheet/style.css')
+    style. 
+      p {
+        color: brown;
+      }
+
+
   body
     h1 Pug - node template engine
-    h2 hello world 
     #container.col
       if youAreUsingPug
         p You are amazing
@@ -15,3 +20,24 @@ html(lang="en")
       p.
         Pug is a terse and simple templating language with a
         strong focus on performance and powerful features.
+
+    h2 go through a list
+    ul
+      - const names = ["Dom", "Sofie", "Mark"]
+      each n, i in names 
+        li= i + "--" + n
+    
+    h2 go through a JSON 
+    ul
+      - const boxes = {"box1": 3, "box2": 6, "box3": 5}
+      each n, i in boxes 
+        li= i + "--" + n
+
+    include nav
+    include prices
+
+
+
+
+      
+      

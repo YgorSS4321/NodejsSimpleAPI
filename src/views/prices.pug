@@ -1,0 +1,32 @@
+mixin price(name, price)
+    .price 
+        .name= name
+        .priceValue= price
+
+style.
+    .price{
+        border: 1px solid black;
+        padding: 10px;
+        width: 250px;
+
+    }
+    .name{
+        font-weight: bold;
+    }
+    .priceValue:before{
+        content: "$";
+
+    }
+
+h2 prices
+- const priceslist = [{name: "item1", price: "6.25"},{name: "item2", price: "13.25"}, {name: "item3", price: "7.5"}]
+div#prices
+    each n in priceslist
+        +price(n.name, n.price)
+
+      
+
+
+
+      
+      
