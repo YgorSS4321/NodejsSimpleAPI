@@ -1,7 +1,7 @@
-mixin price(name, price)
+mixin price(obj)
     .price 
-        .name= name
-        .priceValue= price
+        .name= obj.name
+        .priceValue= obj.price
 
 style.
     .price{
@@ -22,7 +22,7 @@ h2 prices
 - const priceslist = [{name: "item1", price: "6.25"},{name: "item2", price: "13.25"}, {name: "item3", price: "7.5"}]
 div#prices
     each n in priceslist
-        +price(n.name, n.price)
+        +price(n)
 
       
 

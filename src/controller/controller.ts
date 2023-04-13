@@ -1,13 +1,11 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { PrismaClient } from "@prisma/client";
+
 import { z } from 'zod';
 import { equal } from "assert";
 import { FastifyViewOptions } from "@fastify/view";
 
-export const prisma = new PrismaClient({
-    log: ['query'],
-});
 
+import { prisma } from "../model/prismaClient";
 
 
 
@@ -140,12 +138,28 @@ export async function updateSeloPostalTax(request: FastifyRequest){
 
 
 export async function renderHomePage(request: FastifyRequest, reply: FastifyReply){
-    //reply.send("hello world to the new controller");
 
-    console.log(reply.type);
+    const allPostCards = await prisma.postCard.findMany({
+        where: {
+            
+        },
+        select: {
+            title: true,
+            description: true,
+            image_url: true,
 
+        }
+    });
 
-    return await reply.view("./src/views/home.pug", {youAreUsingPug: true});
+    //const allPostCardsByRaw = await prisma.$queryRaw`SELECT title, description, image_url FROM PostCard `;
+    //return await reply.view("./src/views/home.pug", {youAreUsingPug: true, allPostC: allPostCardsByRaw});
+    
 
+    return await reply.view("./src/views/home.pug", {youAreUsingPug: true, allPostC: allPostCards});
+
+}
+
+export async function renderUnusedPages(request: FastifyRequest, reply: FastifyReply){
+    return await reply.view("./src/views/unusedpages/home.pug", {youAreUsingPug: true});
 
 }

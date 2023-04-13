@@ -1,43 +1,17 @@
-doctype html
-html(lang="en")
-  head
-    title= pageTitle
-    script(type='text/javascript')
-    link(rel='stylesheet', type="text/css" href='/public/stylesheet/style.css')
-    style. 
-      p {
-        color: brown;
-      }
+extends layout 
 
+mixin showPostalCard(postalCardObject)
+    .postCard
+        h3= postalCardObject.title 
+        img(src=postalCardObject.image_url)
+        p= postalCardObject.description
 
-  body
-    h1 Pug - node template engine
-    #container.col
-      if youAreUsingPug
-        p You are amazing
-      else
-        p Get on it!
-      p.
-        Pug is a terse and simple templating language with a
-        strong focus on performance and powerful features.
+block content 
+    .postCardList
+        each postalCard in allPostC
+            +showPostalCard(postalCard)
 
-    h2 go through a list
-    ul
-      - const names = ["Dom", "Sofie", "Mark"]
-      each n, i in names 
-        li= i + "--" + n
-    
-    h2 go through a JSON 
-    ul
-      - const boxes = {"box1": 3, "box2": 6, "box3": 5}
-      each n, i in boxes 
-        li= i + "--" + n
+    .buttonList 
 
-    include nav
-    include prices
-
-
-
-
-      
-      
+        input(type="button")
+        input(type="button") 
