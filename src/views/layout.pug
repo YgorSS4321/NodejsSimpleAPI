@@ -62,14 +62,16 @@ html(lang="en")
         justify-content: space-around;
       }
 
-      .buttonList input[type="button"]{
+      .buttonList > input[type="button"]{
         width: 10%;
+        color: white;
+        border-radius: 10%;
       }
-      .buttonList input[type="button"]:nth-child(1){
+      .buttonList > input[type="button"]:nth-child(1){
         background-color: green;
       }
 
-      .buttonList input[type="button"]:nth-child(2){
+      .buttonList > input[type="button"]:nth-child(2){
         background-color: red;
       }
 
@@ -79,7 +81,11 @@ html(lang="en")
     h1 All PostCards saved on the SQLite by Prisma:
     block content
 
-    
+    script. 
+      function showSomeMessageOnConsole(){
+          console.log("CONSOLE IS ON")
+
+      }
 
 
 
