@@ -6,10 +6,19 @@ mixin showPostalCard(postalCardObject)
         img(src=postalCardObject.image_url)
         p= postalCardObject.description
 
+        - let totalTax = 0;
+        each selo in postalCardObject.selos
+            if (selo.tax)
+                - totalTax += selo.tax;
+        p.taxText= totalTax
+        
+        
+
 block content 
     .postCardList
         each postalCard in allPostC
             +showPostalCard(postalCard)
+            
 
     .buttonList 
         

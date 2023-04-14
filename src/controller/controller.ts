@@ -9,12 +9,6 @@ import { prisma } from "../model/prismaClient";
 
 
 
-export async function defaultReturn(request: FastifyRequest){
-    return {
-        name: "teste",
-        someNumber: "1234",
-    };
-}
 
 
 export async function showPostalCards(request: FastifyRequest){
@@ -28,6 +22,7 @@ export async function showPostalCards(request: FastifyRequest){
             selos: {
                 select: {
                     title: true,
+                    tax: true,
                 }
             }
 
@@ -140,15 +135,20 @@ export async function updateSeloPostalTax(request: FastifyRequest){
 export async function renderHomePage(request: FastifyRequest, reply: FastifyReply){
 
     const allPostCards = await prisma.postCard.findMany({
-        where: {
-            
-        },
         select: {
             title: true,
             description: true,
             image_url: true,
 
+            selos: {
+                select: {
+                    title: true,
+                    tax: true,
+                }
+            }
+
         }
+        
     });
 
     //const allPostCardsByRaw = await prisma.$queryRaw`SELECT title, description, image_url FROM PostCard `;
