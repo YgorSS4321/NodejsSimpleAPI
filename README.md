@@ -2,7 +2,7 @@
 
 ### Node.js + Fastify + Typescript + Prisma + SQLite
 
-This is a simple Postcards API, created for learning purposes
+This is a simple Postcards API with a basic PUG Engine view layer, created for learning purposes
 
 The schema of SQLite Database:
 
